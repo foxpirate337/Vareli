@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="32" cy="32" r="30" fill="none" stroke="#2E4A8C" stroke-width="3"/>
+  <circle cx="32" cy="32" r="27" fill="none" stroke="#2E4A8C" stroke-width="1" stroke-dasharray="4 3"/>
+  <text x="32" y="36" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-style="italic" fill="#2E4A8C" font-weight="600">V</text>
+  <path d="M20 44 Q27 48 32 46 Q37 44 44 48" fill="none" stroke="#2E4A8C" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M20 48 Q27 52 32 50 Q37 48 44 52" fill="none" stroke="#2E4A8C" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

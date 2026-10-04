@@ -1,0 +1,300 @@
+/* ═══════════════════════════════════════════════════════════════
+   Vareli Croatian Kitchen & Cocktail Bar — Global Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base resets ─── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply font-body text-navy-800 bg-navy-50 antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  /* Focus styles for keyboard navigation */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-navy-600 rounded;
+  }
+
+  /* Remove focus outline for mouse users */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-navy-600 text-white;
+  }
+}
+
+/* ─── Component classes ─── */
+@layer components {
+  /* Ornamental star/diamond divider */
+  .ornament-divider {
+    @apply flex items-center justify-center gap-3 my-8;
+  }
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: '';
+    @apply h-px flex-1 max-w-[120px];
+    background: linear-gradient(
+      to var(--direction, right),
+      transparent,
+      theme('colors.navy.300'),
+      transparent
+    );
+  }
+  .ornament-divider::before { --direction: right; }
+  .ornament-divider::after { --direction: left; }
+
+  /* Ornamental diamond shape */
+  .ornament-diamond {
+    @apply w-3 h-3 rotate-45 border border-navy-300;
+  }
+
+  /* Gold ornament version for cocktail section */
+  .ornament-divider-gold::before,
+  .ornament-divider-gold::after {
+    background: linear-gradient(
+      to var(--direction, right),
+      transparent,
+      theme('colors.gold.400'),
+      transparent
+    );
+  }
+  .ornament-divider-gold .ornament-diamond {
+    @apply border-gold-400;
+  }
+
+  /* Section container */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  /* Card base */
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-navy-100/50 
+           hover:shadow-md transition-shadow duration-300;
+  }
+
+  /* CTA Button primary */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 
+           bg-navy-600 text-white font-body font-medium 
+           px-6 py-3 rounded-lg
+           hover:bg-navy-700 active:bg-navy-800
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-600
+           transition-colors duration-200
+           cursor-pointer select-none;
+  }
+
+  /* CTA Button secondary */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 
+           bg-white text-navy-700 font-body font-medium 
+           px-6 py-3 rounded-lg border-2 border-navy-200
+           hover:bg-navy-50 hover:border-navy-300 active:bg-navy-100
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-600
+           transition-colors duration-200
+           cursor-pointer select-none;
+  }
+
+  /* CTA Button gold (for cocktail section) */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 
+           bg-gold-500 text-white font-body font-medium 
+           px-6 py-3 rounded-lg
+           hover:bg-gold-600 active:bg-gold-700
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500
+           transition-colors duration-200
+           cursor-pointer select-none;
+  }
+
+  /* Menu tab/chip */
+  .menu-chip {
+    @apply inline-flex items-center gap-1.5 
+           px-4 py-2 rounded-full 
+           text-sm font-medium font-body
+           border border-navy-200 bg-white text-navy-600
+           hover:bg-navy-50 hover:border-navy-300
+           transition-colors duration-200
+           cursor-pointer select-none whitespace-nowrap;
+  }
+  .menu-chip[aria-selected="true"],
+  .menu-chip.active {
+    @apply bg-navy-600 text-white border-navy-600;
+  }
+
+  /* Sticky menu chip container */
+  .menu-chips-container {
+    @apply flex gap-2 overflow-x-auto pb-2 
+           scrollbar-none snap-x snap-mandatory
+           -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap sm:justify-center;
+  }
+  .menu-chips-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Price display */
+  .price-tag {
+    @apply font-display text-lg font-semibold text-navy-700;
+  }
+
+  /* Star rating */
+  .star-rating {
+    @apply inline-flex items-center gap-0.5 text-gold-500;
+  }
+
+  /* Glass effect for header */
+  .glass-header {
+    @apply backdrop-blur-md bg-white/90 border-b border-navy-100/50;
+  }
+
+  /* Parchment background for cocktails */
+  .bg-parchment {
+    background: linear-gradient(135deg, #F1E6CF 0%, #E8D7B8 25%, #F1E6CF 50%, #E8D7B8 75%, #F1E6CF 100%);
+    background-size: 400px 400px;
+  }
+
+  /* Cocktail card */
+  .cocktail-card {
+    @apply relative bg-white/80 backdrop-blur-sm rounded-xl 
+           border border-gold-200 p-6
+           hover:shadow-lg hover:shadow-gold-100/50
+           transition-all duration-300;
+  }
+
+  /* Image placeholder */
+  .img-placeholder {
+    @apply relative overflow-hidden rounded-lg bg-gradient-to-br from-navy-100 to-navy-200;
+  }
+  .img-placeholder::after {
+    content: '';
+    @apply absolute inset-0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5 L35 20 L50 20 L38 30 L42 45 L30 36 L18 45 L22 30 L10 20 L25 20 Z' fill='none' stroke='%232E4A8C' stroke-width='0.5' opacity='0.15'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+}
+
+/* ─── Utility classes ─── */
+@layer utilities {
+  /* Hide scrollbar */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Scroll animation classes */
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-fade-left {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .scroll-fade-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .scroll-fade-right {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .scroll-fade-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Staggered children animation delay */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+
+  /* Text gradient */
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #B08D3C, #DFC690, #B08D3C);
+  }
+
+  /* Ornamental corner decorations (pseudo-element based) */
+  .ornamental-corners {
+    @apply relative;
+  }
+  .ornamental-corners::before {
+    content: '';
+    @apply absolute top-4 left-4 w-12 h-12 pointer-events-none;
+    border-top: 2px solid theme('colors.navy.200');
+    border-left: 2px solid theme('colors.navy.200');
+    border-top-left-radius: 4px;
+  }
+  .ornamental-corners::after {
+    content: '';
+    @apply absolute bottom-4 right-4 w-12 h-12 pointer-events-none;
+    border-bottom: 2px solid theme('colors.navy.200');
+    border-right: 2px solid theme('colors.navy.200');
+    border-bottom-right-radius: 4px;
+  }
+
+  /* Gold ornamental corners for cocktail section */
+  .ornamental-corners-gold::before {
+    border-color: theme('colors.gold.300');
+  }
+  .ornamental-corners-gold::after {
+    border-color: theme('colors.gold.300');
+  }
+}
+
+/* ─── Ornamental SVG pattern for hero background ─── */
+.hero-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 10 L45 25 L60 25 L48 35 L52 50 L40 41 L28 50 L32 35 L20 25 L35 25 Z' fill='none' stroke='white' stroke-width='0.5' opacity='0.08'/%3E%3Ccircle cx='40' cy='40' r='35' fill='none' stroke='white' stroke-width='0.3' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* ─── Wave decoration for sections ─── */
+.wave-decoration {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0,50 C360,100 720,0 1080,50 C1260,75 1380,25 1440,50 L1440,100 L0,100 Z' fill='%23EDF0F8'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+}
